@@ -1,0 +1,7 @@
+/* Center elements both vertically and horizontally */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
