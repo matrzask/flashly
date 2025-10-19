@@ -3,17 +3,19 @@
   --secondary-color: #6c757d; /* Neutral gray for secondary elements */
   --background-color: #e0f7fa; /* Light blue for the background */
   --text-color: #111111; /* Dark gray for text */
+  --alt-text-color: #ffffff; /* Medium gray for alternative text */
   --card-front-color: #ffffff; /* White for flashcard front */
-  --card-back-color: #ffffff; /* White for flashcard back */
+  --card-back-color: #f4f6f8; /* White for flashcard back */
   --card-shadow-color: rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
 }
 
 [data-theme="dark"] {
   --primary-color: #0d6efd;
   --secondary-color: #adb5bd;
-  --background-color: #121212;
+  --background-color: #1a1a1a;
   --text-color: #f8f9fa;
-  --card-front-color: #1e1e1e;
-  --card-back-color: #2c2c2c;
-  --card-shadow-color: rgba(0, 0, 0, 0.5);
+  --alt-text-color: #111111;
+  --card-front-color: #2b2b2b; /* Dark gray for flashcard front */
+  --card-back-color: #333333; /* Slightly darker gray for flashcard back */
+  --card-shadow-color: rgba(0, 0, 0, 0.7); /* Stronger shadow for depth */
 }

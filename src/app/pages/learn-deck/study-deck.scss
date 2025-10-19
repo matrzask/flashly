@@ -3,4 +3,26 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-wrapper {
+  display: inline-block;
+  will-change: transform, opacity;
+  transition: transform 250ms ease, opacity 250ms ease;
+  transform-origin: center center;
+}
+
+.controls {
+  button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--alt-text-color);
+  }
 }

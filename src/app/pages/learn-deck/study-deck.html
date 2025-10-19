@@ -1,3 +1,7 @@
 <div class="study-deck-container">
-  <app-flashcard [card]="flashcards[0]"></app-flashcard>
+  <app-flashcard [card]="flashcards[currentIndex]"></app-flashcard>
+  <div class="controls">
+    <button (click)="changeCard(-1)" [disabled]="currentIndex === 0">Previous</button>
+    <button (click)="changeCard(1)" [disabled]="currentIndex === flashcards.length - 1">Next</button>
+  </div>
 </div>
