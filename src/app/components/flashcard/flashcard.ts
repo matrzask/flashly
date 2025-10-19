@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Card } from '../../types/card';
 
 @Component({
   selector: 'app-flashcard',
@@ -7,8 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './flashcard.scss',
 })
 export class Flashcard {
-  @Input() front: string = '';
-  @Input() back: string = '';
+  @Input() card!: Card;
 
   flipped: boolean = false;
 
