@@ -35,6 +35,5 @@ export class StudyDeck {
     if (newIndex >= 0 && newIndex < this.flashcards.length) {
       this.currentIndex = newIndex;
     }
-    console.log('Current Index:', this.currentIndex);
   }
 }
