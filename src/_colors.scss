@@ -1,0 +1,19 @@
+:root {
+  --primary-color: #0056b3; /* Deep blue for accents */
+  --secondary-color: #6c757d; /* Neutral gray for secondary elements */
+  --background-color: #e0f7fa; /* Light blue for the background */
+  --text-color: #111111; /* Dark gray for text */
+  --card-front-color: #ffffff; /* White for flashcard front */
+  --card-back-color: #ffffff; /* White for flashcard back */
+  --card-shadow-color: rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+}
+
+[data-theme="dark"] {
+  --primary-color: #0d6efd;
+  --secondary-color: #adb5bd;
+  --background-color: #121212;
+  --text-color: #f8f9fa;
+  --card-front-color: #1e1e1e;
+  --card-back-color: #2c2c2c;
+  --card-shadow-color: rgba(0, 0, 0, 0.5);
+}

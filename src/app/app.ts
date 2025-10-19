@@ -15,4 +15,10 @@ export class App {
     front: 'What is Angular?',
     back: 'A platform for building mobile and desktop web applications.',
   };
+
+  toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+  }
 }

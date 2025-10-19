@@ -11,8 +11,10 @@
     transition: transform 0.6s;
     transform-style: preserve-3d;
     transform-origin: center center;
-    color: #111;
+    color: var(--text-color);
     box-sizing: border-box;
+    box-shadow: 0 6px 18px var(--card-shadow-color);
+    border-radius: 8px;
   }
   &.flipped .card {
     transform: rotateX(180deg);
@@ -26,7 +28,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     font-size: 1.1rem;
 
     .content {
@@ -35,10 +36,10 @@
     }
   }
   .front {
-    background: #ffffff;
+    background: var(--card-front-color);
   }
   .back {
-    background: #f4f6f8;
+    background: var(--card-back-color);
     transform: rotateX(180deg);
   }
 }
