@@ -33,6 +33,10 @@
     .content {
       padding: 1rem;
       text-align: center;
+      word-wrap: break-word;
+      overflow: auto;
+      font-size: 2rem;
+      line-height: 1.2;
     }
   }
   .front {
