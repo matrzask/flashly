@@ -18,6 +18,10 @@ export class DeckService {
       id: '3',
       name: 'Japanese Vocabulary',
     },
+    {
+      id: '4',
+      name: 'Advanced Computer Science',
+    },
   ];
 
   cardsByDeck: { [key: string]: { front: string; back: string }[] } = {
@@ -39,6 +43,16 @@ export class DeckService {
       { front: 'こんにちは', back: 'Hello' },
       { front: 'ありがとう', back: 'Thank you' },
       { front: 'さようなら', back: 'Goodbye' },
+    ],
+    '4': [
+      {
+        front: 'Explain the concept of recursion in programming.',
+        back: 'Recursion is a method where the solution to a problem depends on solutions to smaller instances of the same problem, often involving a function calling itself.',
+      },
+      {
+        front: 'What is the difference between HTTP and HTTPS?',
+        back: 'HTTP (HyperText Transfer Protocol) is used for transferring data over the web, while HTTPS (HTTP Secure) adds encryption via SSL/TLS to ensure secure communication.',
+      },
     ],
   };
 
