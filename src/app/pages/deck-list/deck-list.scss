@@ -68,6 +68,16 @@
           background-color: var(--alt-secondary-color);
         }
       }
+
+      &.delete {
+        background-color: var(--warning-color);
+        color: var(--alt-text-color);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--alt-warning-color);
+        }
+      }
     }
   }
 }

@@ -42,6 +42,15 @@ export class DeckList {
     }
   }
 
+  deleteDeck(id: string) {
+    if (!confirm('Are you sure you want to delete this deck?')) {
+      return;
+    }
+    this.deckService.deleteDeck(id).then(() => {
+      this.decks = this.decks.filter((deck) => deck.id !== id);
+    });
+  }
+
   toggleNewDeckForm() {
     this.showNewDeckForm = !this.showNewDeckForm;
   }

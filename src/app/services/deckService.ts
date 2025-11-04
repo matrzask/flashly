@@ -69,7 +69,7 @@ export class DeckService {
     // Simulate an asynchronous operation
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(this.cardsByDeck[deckId] || []);
+        resolve(this.cardsByDeck[deckId] || [{ front: 'Card front', back: 'Card back' }]);
       }, 1);
     });
   }
@@ -77,12 +77,21 @@ export class DeckService {
   async createDeck(name: string): Promise<Deck> {
     // Simulate creating a new deck
     const newDeck: Deck = {
-      id: (this.placeholderDecks.length + 2).toString(),
+      id: (this.placeholderDecks.length + 1).toString(),
       name: name,
     };
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(newDeck);
+      }, 1);
+    });
+  }
+
+  async deleteDeck(deckId: string): Promise<void> {
+    // Simulate deleting a deck
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
       }, 1);
     });
   }

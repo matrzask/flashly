@@ -9,6 +9,8 @@
   --card-front-color: #ffffff; /* White for flashcard front */
   --card-back-color: #f4f6f8; /* White for flashcard back */
   --card-shadow-color: rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  --warning-color: #dc3545; /* Red for delete buttons or warnings */
+  --alt-warning-color: #c82333; /* Darker red for warning hover states */
 }
 
 [data-theme="dark"] {
@@ -22,4 +24,6 @@
   --card-front-color: #2b2b2b; /* Dark gray for flashcard front */
   --card-back-color: #333333; /* Slightly darker gray for flashcard back */
   --card-shadow-color: rgba(0, 0, 0, 0.7); /* Stronger shadow for depth */
+  --warning-color: #ff6b6b;
+  --alt-warning-color: #e55353;
 }
