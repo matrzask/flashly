@@ -1,6 +1,8 @@
 :root {
   --primary-color: #0056b3; /* Deep blue for accents */
+  --alt-primary-color: #004085; /* Darker blue for hover states */
   --secondary-color: #6c757d; /* Neutral gray for secondary elements */
+  --alt-secondary-color: #5a6268; /* Darker gray for secondary hover states */
   --background-color: #e0f7fa; /* Light blue for the background */
   --text-color: #111111; /* Dark gray for text */
   --alt-text-color: #ffffff; /* Medium gray for alternative text */
@@ -11,7 +13,9 @@
 
 [data-theme="dark"] {
   --primary-color: #0d6efd;
+  --alt-primary-color: #084298;
   --secondary-color: #adb5bd;
+  --alt-secondary-color: #6c757d;
   --background-color: #1a1a1a;
   --text-color: #f8f9fa;
   --alt-text-color: #111111;

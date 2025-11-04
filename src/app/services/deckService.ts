@@ -73,4 +73,17 @@ export class DeckService {
       }, 1);
     });
   }
+
+  async createDeck(name: string): Promise<Deck> {
+    // Simulate creating a new deck
+    const newDeck: Deck = {
+      id: (this.placeholderDecks.length + 2).toString(),
+      name: name,
+    };
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(newDeck);
+      }, 1);
+    });
+  }
 }
