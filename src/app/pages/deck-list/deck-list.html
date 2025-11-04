@@ -3,15 +3,17 @@
   <div class="new-deck-container">
     <button (click)="toggleNewDeckForm()" class="btn new-deck">+ New Deck</button>
   </div>
-  <div *ngIf="showNewDeckForm" class="new-deck-form">
-    <input
-      type="text"
-      [(ngModel)]="newDeckName"
-      placeholder="Enter deck name"
-      class="new-deck-input"
-    />
-    <button (click)="addNewDeck()" class="btn" [disabled]="addingDeck">Add</button>
-  </div>
+  @if (showNewDeckForm) {
+    <div class="new-deck-form">
+      <input
+        type="text"
+        [(ngModel)]="newDeckName"
+        placeholder="Enter deck name"
+        class="new-deck-input"
+      />
+      <button (click)="addNewDeck()" class="btn" [disabled]="addingDeck">Add</button>
+    </div>
+  }
 
   <ul class="deck-list">
     @for (deck of decks; track deck.id) {
