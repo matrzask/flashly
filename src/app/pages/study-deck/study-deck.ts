@@ -3,6 +3,7 @@ import { Flashcard } from '../../components/flashcard/flashcard';
 import { Card } from '../../types/card';
 import { ActivatedRoute } from '@angular/router';
 import { CardService } from '../../services/cardService';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-study-deck',
@@ -15,7 +16,11 @@ export class StudyDeck {
   deckId: string = '';
   currentIndex: number = 0;
 
-  constructor(private cardService: CardService, private route: ActivatedRoute) {}
+  constructor(
+    private cardService: CardService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -35,5 +40,9 @@ export class StudyDeck {
     if (newIndex >= 0 && newIndex < this.flashcards.length) {
       this.currentIndex = newIndex;
     }
+  }
+
+  navigateBack() {
+    this.location.back();
   }
 }

@@ -1,4 +1,7 @@
 <div class="study-deck-container">
+  <div class="controls">
+    <button (click)="navigateBack()">Back</button>
+  </div>
   <app-flashcard [card]="flashcards[currentIndex]"></app-flashcard>
   <div class="controls">
     <button (click)="changeCard(-1)" [disabled]="currentIndex === 0">Previous</button>
