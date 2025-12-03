@@ -1,0 +1,58 @@
+<div class="edit-deck-container">
+  <h1>Edit Deck</h1>
+
+  @if (deck) {
+    <div class="deck-form container">
+      <label>
+        Name:
+        <input type="text" [(ngModel)]="deck.name" />
+      </label>
+
+      <label>
+        Public:
+        <input type="checkbox" [(ngModel)]="deck.public" (change)="togglePublic()" />
+      </label>
+
+      <div class="actions">
+        <button (click)="saveDeck()" [disabled]="saving">Save Deck</button>
+        <button class="btn-back" (click)="navigateBack()">Back</button>
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Cards</h2>
+    <ul class="cards-list container">
+      @for (card of cards; track card.id; let i = $index) {
+        <li class="card-item">
+          @if (editingCardIndex !== i) {
+            <div class="card-view">
+              <div class="card-front"><strong>Front:</strong> {{ card.front }}</div>
+              <div class="card-back"><strong>Back:</strong> {{ card.back }}</div>
+              <div class="card-actions">
+                <button (click)="startEditCard(i)">Edit</button>
+                <button (click)="deleteCard(i)">Delete</button>
+              </div>
+            </div>
+          }
+
+          @if (editingCardIndex === i) {
+            <div class="card-edit">
+              <input [(ngModel)]="editFront" placeholder="Front" />
+              <input [(ngModel)]="editBack" placeholder="Back" />
+              <button (click)="saveCard(i)">Save</button>
+              <button (click)="cancelEdit()">Cancel</button>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+
+    <div class="add-card container">
+      <h3>Add Card</h3>
+      <input [(ngModel)]="newCardFront" placeholder="Front" />
+      <input [(ngModel)]="newCardBack" placeholder="Back" />
+      <button (click)="addCard()" [disabled]="!newCardFront.trim()">Add Card</button>
+    </div>
+  }
+</div>

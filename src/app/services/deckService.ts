@@ -37,6 +37,16 @@ export class DeckService {
     });
   }
 
+  async getDeckById(deckId: string): Promise<Deck | null> {
+    // Simulate fetching a deck by ID
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const deck = this.placeholderDecks.find((d) => d.id === deckId) || null;
+        resolve(deck);
+      }, 1);
+    });
+  }
+
   async createDeck(name: string): Promise<Deck> {
     // Simulate creating a new deck
     const newDeck: Deck = {

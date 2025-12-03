@@ -1,0 +1,163 @@
+.edit-deck-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  h2,
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+}
+
+.container {
+  background: var(--card-front-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px var(--card-shadow-color);
+  margin-bottom: 1.5rem;
+}
+
+.deck-form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-weight: 500;
+    color: var(--text-color);
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+
+    input[type='text'] {
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--card-shadow-color);
+      background: var(--card-back-color);
+      color: var(--text-color);
+      flex: 1;
+    }
+
+    input[type='checkbox'] {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.cards-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  .card-item {
+    background: var(--card-front-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--card-shadow-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-view {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .card-front,
+    .card-back {
+      color: var(--text-color);
+    }
+
+    .card-actions {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  .card-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input {
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--card-shadow-color);
+      background: var(--card-back-color);
+      color: var(--text-color);
+    }
+  }
+}
+
+.add-card {
+  input {
+    width: 100%;
+    max-width: 350px;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--card-shadow-color);
+    background: var(--card-back-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--alt-text-color);
+  background-color: var(--primary-color);
+  transition: background-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: var(--alt-primary-color);
+  }
+
+  &:disabled {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+  }
+}
+
+/* Back button style */
+button.btn-back {
+  background-color: var(--secondary-color);
+
+  &:hover:not(:disabled) {
+    background-color: var(--alt-secondary-color);
+  }
+}
+
+/* Special delete buttons inside card-actions */
+.card-actions button:last-child {
+  background-color: var(--warning-color);
+
+  &:hover:not(:disabled) {
+    background-color: var(--alt-warning-color);
+  }
+}

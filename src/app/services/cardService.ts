@@ -54,6 +54,7 @@ export class CardService {
     // Simulate updating flashcards for a deck
     return new Promise((resolve) => {
       setTimeout(() => {
+        console.log(`Updated cards for deck ${deckId}:`, cards);
         resolve();
       }, 1);
     });
