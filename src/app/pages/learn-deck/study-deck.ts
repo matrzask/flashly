@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Flashcard } from '../../components/flashcard/flashcard';
 import { Card } from '../../types/card';
-import { DeckService } from '../../services/deckService';
 import { ActivatedRoute } from '@angular/router';
+import { CardService } from '../../services/cardService';
 
 @Component({
   selector: 'app-study-deck',
@@ -15,7 +15,7 @@ export class StudyDeck {
   deckId: string = '';
   currentIndex: number = 0;
 
-  constructor(private deckService: DeckService, private route: ActivatedRoute) {}
+  constructor(private cardService: CardService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -25,7 +25,7 @@ export class StudyDeck {
   }
 
   loadFlashcards() {
-    this.deckService.getFlashcardsByDeckId(this.deckId).then((cards: Card[]) => {
+    this.cardService.getFlashcardsByDeckId(this.deckId).then((cards: Card[]) => {
       this.flashcards = cards;
     });
   }
