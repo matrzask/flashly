@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { StudyDeck } from './pages/learn-deck/study-deck';
+import { StudyDeck } from './pages/study-deck/study-deck';
 import { DeckList } from './pages/deck-list/deck-list';
 import { EditDeck } from './pages/edit-deck/edit-deck';
 
