@@ -37,6 +37,16 @@ export class DeckService {
     });
   }
 
+  async getPublicDecks(): Promise<Deck[]> {
+    // Simulate fetching only public decks
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const publicDecks = this.placeholderDecks.filter((deck) => deck.public);
+        resolve(publicDecks);
+      }, 1);
+    });
+  }
+
   async getDeckById(deckId: string): Promise<Deck | null> {
     // Simulate fetching a deck by ID
     return new Promise((resolve) => {
