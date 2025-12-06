@@ -1,1 +1,14 @@
-<p>theme-select works!</p>
+<label class="theme-select">
+  <span class="theme-select-label">Theme:</span>
+  <select
+    class="theme-select-dropdown"
+    [ngModel]="selectedTheme"
+    (ngModelChange)="onThemeChange($event)"
+  >
+    @for (theme of themes; track theme.value) {
+      <option [value]="theme.value">
+        {{ theme.label }}
+      </option>
+    }
+  </select>
+</label>
