@@ -3,14 +3,14 @@
 
 	<ul class="deck-list">
 		@for (deck of decks; track deck.id) {
-			<li class="deck-item">
+			<li class="deck-item card-container">
 				<div class="deck-info">
 					<h2>{{deck.name}}</h2>
 				</div>
-				<div class="deck-actions">
-					<a [routerLink]="['/study', deck.id]" class="btn study">Study</a>
-					<button type="button" class="btn copy" (click)="copyDeck(deck)">Copy</button>
-				</div>
+			<div class="deck-actions">
+				<a [routerLink]="['/study', deck.id]" class="btn btn-primary">Study</a>
+				<button type="button" class="btn btn-secondary" (click)="copyDeck(deck)">Copy</button>
+			</div>
 			</li>
 		}
 	</ul>

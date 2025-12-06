@@ -19,10 +19,6 @@
 }
 
 .deck-item {
-	background: var(--card-front-color);
-	border-radius: 8px;
-	padding: 1.5rem;
-	box-shadow: 0 2px 8px var(--card-shadow-color);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -43,34 +39,6 @@
 	.deck-actions {
 		display: flex;
 		gap: 1rem;
-
-		.btn {
-			padding: 0.5rem 1rem;
-			border-radius: 4px;
-			text-decoration: none;
-			font-weight: 500;
-			transition: background-color 0.2s ease;
-			border: none;
-			cursor: pointer;
-
-			&.study {
-				background-color: var(--primary-color);
-				color: var(--alt-text-color);
-
-				&:hover {
-					background-color: var(--alt-primary-color);
-				}
-			}
-
-			&.copy {
-				background-color: var(--secondary-color);
-				color: var(--alt-text-color);
-
-				&:hover {
-					background-color: var(--alt-secondary-color);
-				}
-			}
-		}
 	}
 }
 

@@ -2,10 +2,10 @@
   <h1>Edit Deck</h1>
 
   @if (deck) {
-    <div class="deck-form container">
+    <div class="deck-form container card-container">
       <label>
         Name:
-        <input type="text" [(ngModel)]="deck.name" />
+        <input type="text" [(ngModel)]="deck.name" class="input" />
       </label>
 
       <label>
@@ -14,45 +14,45 @@
       </label>
 
       <div class="actions">
-        <button (click)="saveDeck()" [disabled]="saving">Save Deck</button>
-        <button class="btn-back" (click)="navigateBack()">Back</button>
+        <button (click)="saveDeck()" [disabled]="saving" class="btn btn-primary">Save Deck</button>
+        <button (click)="navigateBack()" class="btn btn-secondary">Back</button>
       </div>
     </div>
 
     <hr />
 
     <h2>Cards</h2>
-    <ul class="cards-list container">
+    <ul class="cards-list container card-container">
       @for (card of cards; track card.id; let i = $index) {
-        <li class="card-item">
+        <li class="card-item card-container">
           @if (editingCardIndex !== i) {
             <div class="card-view">
               <div class="card-front"><strong>Front:</strong> {{ card.front }}</div>
               <div class="card-back"><strong>Back:</strong> {{ card.back }}</div>
               <div class="card-actions">
-                <button (click)="startEditCard(i)">Edit</button>
-                <button (click)="deleteCard(i)">Delete</button>
+                <button (click)="startEditCard(i)" class="btn btn-secondary">Edit</button>
+                <button (click)="deleteCard(i)" class="btn btn-danger">Delete</button>
               </div>
             </div>
           }
 
           @if (editingCardIndex === i) {
             <div class="card-edit">
-              <input [(ngModel)]="editFront" placeholder="Front" />
-              <input [(ngModel)]="editBack" placeholder="Back" />
-              <button (click)="saveCard(i)">Save</button>
-              <button (click)="cancelEdit()">Cancel</button>
+              <input [(ngModel)]="editFront" placeholder="Front" class="input" />
+              <input [(ngModel)]="editBack" placeholder="Back" class="input" />
+              <button (click)="saveCard(i)" class="btn btn-primary">Save</button>
+              <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
             </div>
           }
         </li>
       }
     </ul>
 
-    <div class="add-card container">
+    <div class="add-card container card-container">
       <h3>Add Card</h3>
-      <input [(ngModel)]="newCardFront" placeholder="Front" />
-      <input [(ngModel)]="newCardBack" placeholder="Back" />
-      <button (click)="addCard()" [disabled]="!newCardFront.trim()">Add Card</button>
+      <input [(ngModel)]="newCardFront" placeholder="Front" class="input" />
+      <input [(ngModel)]="newCardBack" placeholder="Back" class="input" />
+      <button (click)="addCard()" [disabled]="!newCardFront.trim()" class="btn btn-primary">Add Card</button>
     </div>
   }
 </div>

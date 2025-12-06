@@ -1,10 +1,10 @@
 <div class="study-deck-container">
   <div class="controls">
-    <button (click)="navigateBack()">Back</button>
+    <button (click)="navigateBack()" class="btn btn-secondary">Back</button>
   </div>
   <app-flashcard [card]="flashcards[currentIndex]"></app-flashcard>
   <div class="controls">
-    <button (click)="changeCard(-1)" [disabled]="currentIndex === 0">Previous</button>
-    <button (click)="changeCard(1)" [disabled]="currentIndex === flashcards.length - 1">Next</button>
+    <button (click)="changeCard(-1)" [disabled]="currentIndex === 0" class="btn btn-primary">Previous</button>
+    <button (click)="changeCard(1)" [disabled]="currentIndex === flashcards.length - 1" class="btn btn-primary">Next</button>
   </div>
 </div>

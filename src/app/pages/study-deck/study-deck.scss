@@ -22,17 +22,5 @@
 .controls {
   button {
     margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 5px;
-    color: var(--alt-text-color);
-
-    &:disabled {
-      background-color: var(--secondary-color);
-      cursor: not-allowed;
-    }
   }
 }
