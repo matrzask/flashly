@@ -1,8 +1,24 @@
 .flashcard {
+  max-width: 100vw;
   width: 480px;
   height: 300px;
   perspective: 1000px;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    width: 600px;
+    height: 375px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 720px;
+    height: 450px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 840px;
+    height: 525px;
+  }
 
   .card {
     width: 100%;
@@ -37,6 +53,18 @@
       overflow: auto;
       font-size: 2rem;
       line-height: 1.2;
+
+      @media (min-width: 768px) {
+        font-size: 2.25rem;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 2.5rem;
+      }
+
+      @media (min-width: 1440px) {
+        font-size: 2.75rem;
+      }
     }
   }
   .front {

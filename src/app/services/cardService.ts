@@ -45,7 +45,7 @@ export class CardService {
     // Simulate an asynchronous operation
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(this.cardsByDeck[deckId] || [{ front: 'Card front', back: 'Card back' }]);
+        resolve(this.cardsByDeck[deckId] || []);
       }, 1);
     });
   }

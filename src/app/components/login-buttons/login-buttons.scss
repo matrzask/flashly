@@ -1,0 +1,14 @@
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
+}
+
+.btn {
+  @media (max-width: 768px) {
+    padding: 0.5rem 0.5rem;
+  }
+}
