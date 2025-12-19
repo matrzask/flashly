@@ -15,6 +15,7 @@ export class StudyDeck {
   flashcards: Card[] = [];
   deckId: string = '';
   currentIndex: number = 0;
+  loading: boolean = false;
 
   constructor(
     private cardService: CardService,
@@ -30,8 +31,10 @@ export class StudyDeck {
   }
 
   loadFlashcards() {
+    this.loading = true;
     this.cardService.getFlashcardsByDeckId(this.deckId).then((cards: Card[]) => {
       this.flashcards = cards;
+      this.loading = false;
     });
   }
 

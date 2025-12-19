@@ -2,9 +2,17 @@
   <div class="controls">
     <button (click)="navigateBack()" class="btn btn-secondary">Back</button>
   </div>
-  <app-flashcard [card]="flashcards[currentIndex]"></app-flashcard>
-  <div class="controls">
-    <button (click)="changeCard(-1)" [disabled]="currentIndex === 0" class="btn btn-primary">Previous</button>
-    <button (click)="changeCard(1)" [disabled]="currentIndex === flashcards.length - 1" class="btn btn-primary">Next</button>
-  </div>
+  @if (loading) {
+    <p>Loading flashcards...</p>
+  }
+  @else if (flashcards.length === 0) {
+    <p>No flashcards available in this deck.</p>
+  }
+  @else {
+    <app-flashcard [card]="flashcards[currentIndex]"></app-flashcard>
+    <div class="controls">
+      <button (click)="changeCard(-1)" [disabled]="currentIndex === 0" class="btn btn-primary">Previous</button>
+      <button (click)="changeCard(1)" [disabled]="currentIndex === flashcards.length - 1" class="btn btn-primary">Next</button>
+    </div>
+  }
 </div>
