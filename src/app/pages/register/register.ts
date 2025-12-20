@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/authService';
+import { User, UserRole } from '../../types/user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,7 @@ export class Register {
   errorMessage = '';
   isLoading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private location: Location) {}
 
   async onSubmit() {
     this.errorMessage = '';
@@ -40,13 +42,31 @@ export class Register {
     this.isLoading = true;
 
     try {
-      await this.authService.register(this.name, this.email, this.password);
-      this.router.navigate(['/decks']);
+      let user: User = {
+        name: this.name,
+        email: this.email,
+        role: UserRole.USER,
+      };
+      this.authService.register(user, this.password).subscribe({
+        next: (response) => {
+          console.log('Registration successful:', response);
+          this.location.back();
+        },
+        error: (error) => {
+          this.errorMessage = 'Registration failed. Please try again.';
+          console.error('Registration error:', error);
+          this.isLoading = false;
+        },
+      });
     } catch (error) {
       this.errorMessage = 'Registration failed. Please try again.';
       console.error('Registration error:', error);
     } finally {
       this.isLoading = false;
     }
+  }
+
+  navigateBack() {
+    this.location.back();
   }
 }

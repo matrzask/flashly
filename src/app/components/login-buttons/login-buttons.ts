@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/authService';
 import { User } from '../../types/user';
 import { RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-buttons',
@@ -11,9 +12,21 @@ import { RouterModule } from '@angular/router';
 })
 export class LoginButtons {
   user: User | null = null;
+  private userSubscription?: Subscription;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.user = this.authService.getCurrentUser();
+    this.userSubscription = this.authService.currentUser.subscribe((currentUser) => {
+      this.user = currentUser?.user || null;
+    });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription?.unsubscribe();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

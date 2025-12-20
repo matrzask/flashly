@@ -1,52 +1,84 @@
 import { Injectable } from '@angular/core';
 import { User, UserRole } from '../types/user';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUser: User | null = null;
+  private path = 'http://localhost:3000/auth';
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
-  getCurrentUser(): User | null {
-    return this.currentUser;
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<any>(
+      JSON.parse(localStorage.getItem('currentUser')!)
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
+    console.log('User loaded from localStorage:', this.currentUserSubject.value);
   }
 
-  async login(email: string, password: string): Promise<User> {
-    // Placeholder: Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const user: User = {
-          id: '1',
-          name: email.split('@')[0],
-          email: email,
-          role: UserRole.USER,
-        };
-        this.currentUser = user;
-        console.log('User logged in:', user);
-        resolve(user);
-      }, 500);
-    });
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
   }
 
-  async register(name: string, email: string, password: string): Promise<User> {
-    // Placeholder: Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const user: User = {
-          id: Date.now().toString(),
-          name: name,
-          email: email,
-          role: UserRole.USER,
-        };
-        this.currentUser = user;
-        console.log('User registered:', user);
-        resolve(user);
-      }, 500);
-    });
+  login(email: string, password: string) {
+    return this.http.post<any>(`${this.path}/login`, { email, password }).pipe(
+      tap((response) => {
+        const user = response.data.user;
+        const token = response.data.token;
+        const refreshToken = response.data.refreshToken;
+        if (user && token && refreshToken) {
+          localStorage.setItem('currentUser', JSON.stringify({ user, token, refreshToken }));
+          this.currentUserSubject.next({ user, token, refreshToken });
+        }
+        return response;
+      })
+    );
+  }
+
+  register(user: User, password: string) {
+    return this.http.post<any>(`${this.path}/register`, { ...user, password }).pipe(
+      tap((response) => {
+        const user = response.data.user;
+        const token = response.data.token;
+        const refreshToken = response.data.refreshToken;
+        if (user && token && refreshToken) {
+          localStorage.setItem('currentUser', JSON.stringify({ user, token, refreshToken }));
+          this.currentUserSubject.next({ user, token, refreshToken });
+        }
+        return response;
+      })
+    );
   }
 
   logout(): void {
-    this.currentUser = null;
-    console.log('User logged out');
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+  }
+
+  refreshToken() {
+    const currentUser = this.currentUserValue;
+    return this.http
+      .post<any>(`${this.path}/refresh-token`, {
+        token: currentUser.refreshToken,
+      })
+      .pipe(
+        tap((response) => {
+          if (response.status === 'fail') {
+            throw new Error(response.message);
+          } else {
+            const token = response.data.token;
+            const refreshToken = response.data.refreshToken;
+            if (token && refreshToken) {
+              const user = currentUser.user;
+              localStorage.setItem('currentUser', JSON.stringify({ user, token, refreshToken }));
+              this.currentUserSubject.next({ user, token, refreshToken });
+            }
+          }
+          return response;
+        })
+      );
   }
 }
