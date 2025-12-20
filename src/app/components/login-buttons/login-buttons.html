@@ -1,5 +1,6 @@
 <div class="login-container">
   @if (user) {
+    <p>Welcome, {{ user.name }}!</p>
     <button class="btn btn-secondary" (click)="logout()">Logout</button>
   }
   @else {

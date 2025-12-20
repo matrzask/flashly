@@ -12,3 +12,12 @@
     padding: 0.5rem 0.5rem;
   }
 }
+
+p {
+  display: inline-block;
+  margin-right: 1rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
