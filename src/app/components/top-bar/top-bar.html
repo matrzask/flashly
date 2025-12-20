@@ -2,7 +2,7 @@
   <div class="options">
     <app-theme-select> </app-theme-select>
     <div class="links">
-      <a [routerLink]="['/decks']" class="option">My Decks</a>
+      <a *ngIf="this.user !== null" [routerLink]="['/decks']" class="option">My Decks</a>
       <a [routerLink]="['/public-decks']" class="option">Public Decks</a>
     </div>
     <app-login-buttons></app-login-buttons>
