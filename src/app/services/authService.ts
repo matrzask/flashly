@@ -61,7 +61,7 @@ export class AuthService {
   refreshToken() {
     const currentUser = this.currentUserValue;
     return this.http
-      .post<any>(`${this.path}/refresh-token`, {
+      .post<any>(`${this.path}/refresh`, {
         token: currentUser.refreshToken,
       })
       .pipe(
