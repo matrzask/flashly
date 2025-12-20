@@ -1,91 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Deck } from '../types/deck';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DeckService {
-  placeholderDecks: Deck[] = [
-    {
-      id: '1',
-      name: 'Programming Basics',
-      public: true,
-    },
-    {
-      id: '2',
-      name: 'Web Development',
-      public: false,
-    },
-    {
-      id: '3',
-      name: 'Japanese Vocabulary',
-      public: true,
-    },
-    {
-      id: '4',
-      name: 'Advanced Computer Science',
-      public: false,
-    },
-  ];
+  private path = 'http://localhost:3000/decks';
+  constructor(private http: HttpClient) {}
 
-  async getDecks(): Promise<Deck[]> {
-    // Simulate an asynchronous operation
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.placeholderDecks);
-      }, 1);
-    });
+  getDecks(): Observable<Deck[]> {
+    return this.http.get<Deck[]>(this.path);
   }
 
-  async getPublicDecks(): Promise<Deck[]> {
-    // Simulate fetching only public decks
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const publicDecks = this.placeholderDecks.filter((deck) => deck.public);
-        resolve(publicDecks);
-      }, 1);
-    });
+  getPublicDecks(): Observable<Deck[]> {
+    return this.http.get<Deck[]>(`${this.path}/public`);
   }
 
-  async getDeckById(deckId: string): Promise<Deck | null> {
-    // Simulate fetching a deck by ID
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const deck = this.placeholderDecks.find((d) => d.id === deckId) || null;
-        resolve(deck);
-      }, 1);
-    });
+  getDeckById(deckId: string): Observable<Deck | null> {
+    return this.http.get<Deck>(`${this.path}/${deckId}`);
   }
 
-  async createDeck(name: string): Promise<Deck> {
-    // Simulate creating a new deck
-    const newDeck: Deck = {
-      id: (this.placeholderDecks.length + 1).toString(),
-      name: name,
-      public: false,
-    };
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(newDeck);
-      }, 1);
-    });
+  createDeck(name: string): Observable<Deck> {
+    return this.http.post<Deck>(this.path, { name });
   }
 
-  async deleteDeck(deckId: string): Promise<void> {
-    // Simulate deleting a deck
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1);
-    });
+  deleteDeck(deckId: string): Observable<void> {
+    return this.http.delete<void>(`${this.path}/${deckId}`);
   }
 
-  async updateDeck(deck: Deck): Promise<Deck> {
-    // Simulate updating a deck
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(deck);
-      }, 1);
-    });
+  updateDeck(deck: Deck): Observable<Deck> {
+    return this.http.put<Deck>(`${this.path}/${deck.id}`, { name: deck.name, public: deck.public });
   }
 }

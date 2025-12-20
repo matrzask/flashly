@@ -32,7 +32,7 @@ export class StudyDeck {
 
   loadFlashcards() {
     this.loading = true;
-    this.cardService.getFlashcardsByDeckId(this.deckId).then((cards: Card[]) => {
+    this.cardService.getFlashcardsByDeckId(this.deckId).subscribe((cards: Card[]) => {
       this.flashcards = cards;
       this.loading = false;
     });

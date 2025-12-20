@@ -16,7 +16,7 @@ export class PublicDecks {
   constructor(private deckService: DeckService) {}
 
   async ngOnInit() {
-    this.deckService.getPublicDecks().then((decks) => {
+    this.deckService.getPublicDecks().subscribe((decks: Deck[]) => {
       this.decks = decks;
     });
   }

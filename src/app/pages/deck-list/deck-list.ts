@@ -20,7 +20,7 @@ export class DeckList {
   constructor(private deckService: DeckService) {}
 
   async ngOnInit() {
-    this.deckService.getDecks().then((decks) => {
+    this.deckService.getDecks().subscribe((decks: Deck[]) => {
       this.decks = decks;
     });
   }
@@ -29,16 +29,19 @@ export class DeckList {
     if (this.newDeckName.trim()) {
       this.addingDeck = true;
 
-      this.deckService
-        .createDeck(this.newDeckName)
-        .then((newDeck) => {
+      this.deckService.createDeck(this.newDeckName).subscribe({
+        next: (newDeck: Deck) => {
           this.decks.push(newDeck);
           this.newDeckName = '';
           this.showNewDeckForm = false;
-        })
-        .finally(() => {
+        },
+        error: () => {
+          console.error('Failed to create deck');
+        },
+        complete: () => {
           this.addingDeck = false;
-        });
+        },
+      });
     }
   }
 
@@ -46,7 +49,7 @@ export class DeckList {
     if (!confirm('Are you sure you want to delete this deck?')) {
       return;
     }
-    this.deckService.deleteDeck(id).then(() => {
+    this.deckService.deleteDeck(id).subscribe(() => {
       this.decks = this.decks.filter((deck) => deck.id !== id);
     });
   }

@@ -42,18 +42,30 @@ export class EditDeck {
   }
 
   async loadDeck() {
-    this.deck = await this.deckService.getDeckById(this.deckId);
+    this.deckService.getDeckById(this.deckId).subscribe((deck) => {
+      this.deck = deck;
+    });
   }
 
   async loadCards() {
-    this.cards = await this.cardService.getFlashcardsByDeckId(this.deckId);
+    this.cardService.getFlashcardsByDeckId(this.deckId).subscribe((cards) => {
+      this.cards = cards;
+    });
   }
 
   async saveDeck() {
     if (!this.deck) return;
     this.saving = true;
-    await this.deckService.updateDeck(this.deck);
-    this.saving = false;
+    this.deckService.updateDeck(this.deck).subscribe({
+      next: (updatedDeck) => {
+        this.deck = updatedDeck;
+        this.saving = false;
+      },
+      error: () => {
+        console.error('Failed to update deck');
+        this.saving = false;
+      },
+    });
   }
 
   togglePublic() {
@@ -66,11 +78,12 @@ export class EditDeck {
     const front = this.newCardFront.trim();
     const back = this.newCardBack.trim();
     if (!front) return;
-    const newCard: Card = { id: Date.now().toString(), front, back };
-    this.cards.push(newCard);
-    this.newCardFront = '';
-    this.newCardBack = '';
-    await this.cardService.updateFlashcards(this.deck.id, this.cards);
+    const newCard: Card = { front, back };
+    this.cardService.addFlashcard(this.deck.id, newCard).subscribe((createdCard) => {
+      this.cards.push(createdCard);
+      this.newCardFront = '';
+      this.newCardBack = '';
+    });
   }
 
   startEditCard(index: number) {
@@ -89,19 +102,26 @@ export class EditDeck {
     const front = this.editFront.trim();
     const back = this.editBack.trim();
     if (!front) return;
-    this.cards[index].front = front;
-    this.cards[index].back = back;
-    this.cancelEdit();
     if (this.deck) {
-      await this.cardService.updateFlashcards(this.deck.id, this.cards);
+      this.cardService
+        .updateFlashcard(this.deck.id, {
+          ...this.cards[index],
+          front,
+          back,
+        })
+        .subscribe((updatedCard) => {
+          this.cards[index] = updatedCard;
+          this.cancelEdit();
+        });
     }
   }
 
   async deleteCard(index: number) {
     if (!confirm('Delete this card?')) return;
-    this.cards.splice(index, 1);
     if (this.deck) {
-      await this.cardService.updateFlashcards(this.deck.id, this.cards);
+      this.cardService.deleteFlashcard(this.deck.id, this.cards[index].id!).subscribe(() => {
+        this.cards.splice(index, 1);
+      });
     }
   }
 
