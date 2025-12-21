@@ -23,6 +23,7 @@
         </div>
         <div class="deck-actions">
           <a [routerLink]="['/study', deck.id]" class="btn btn-primary">Study</a>
+          <a [routerLink]="['/quiz', deck.id]" class="btn btn-primary">Quiz</a>
           <a [routerLink]="['/edit', deck.id]" class="btn btn-secondary">Edit</a>
           <a (click)="deleteDeck(deck.id)" class="btn btn-danger">Delete</a>
         </div>

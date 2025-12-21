@@ -1,0 +1,63 @@
+<div class="quiz-container">
+  <div *ngIf="loading" class="loading">Loading quiz...</div>
+
+  <div *ngIf="!loading && !quizComplete" class="quiz-content">
+    <div class="quiz-header">
+      <h2>Quiz Mode</h2>
+      <div class="progress">
+        Question {{ currentQuizIndex + 1 }} of {{ quizCards.length }}
+      </div>
+      <div class="score">Score: {{ score }}/{{ answeredCount }}</div>
+    </div>
+
+    <div *ngIf="currentQuiz" class="quiz-question">
+      <div class="question-card">
+        <h3>{{ currentQuiz.question }}</h3>
+      </div>
+
+      <div class="options">
+        <div
+          *ngFor="let option of currentQuiz.options; let i = index"
+          class="option"
+          [class.selected]="selectedOption === i"
+          [class.correct]="showResult && option.isCorrect"
+          [class.incorrect]="showResult && selectedOption === i && !option.isCorrect"
+          (click)="selectOption(i)"
+        >
+          {{ option.text }}
+        </div>
+      </div>
+
+      <div class="quiz-actions">
+        <button
+          *ngIf="!showResult"
+          class="btn btn-primary"
+          [disabled]="selectedOption === null"
+          (click)="submitAnswer()"
+        >
+          Submit Answer
+        </button>
+
+        <button *ngIf="showResult" class="btn btn-primary" (click)="nextQuestion()">
+          {{ currentQuizIndex < quizCards.length - 1 ? 'Next Question' : 'Finish Quiz' }}
+        </button>
+
+        <button class="btn btn-secondary" (click)="exitQuiz()">Exit Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="quizComplete" class="quiz-complete">
+    <h2>Quiz Complete!</h2>
+    <div class="final-score">
+      <p>Your Score:</p>
+      <h1>{{ score }} / {{ quizCards.length }}</h1>
+      <p class="percentage">{{ (score / quizCards.length * 100).toFixed(0) }}%</p>
+    </div>
+
+    <div class="complete-actions">
+      <button class="btn btn-primary" (click)="restartQuiz()">Retry Quiz</button>
+      <button class="btn btn-secondary" (click)="exitQuiz()">Exit to Decks</button>
+    </div>
+  </div>
+</div>
