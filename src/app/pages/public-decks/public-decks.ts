@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DeckService } from '../../services/deckService';
 import { Deck } from '../../types/deck';
+import { User } from '../../types/user';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/authService';
 
 @Component({
   selector: 'app-public-decks',
@@ -12,17 +15,39 @@ import { Deck } from '../../types/deck';
 })
 export class PublicDecks {
   decks: Deck[] = [];
+  user: User | null = null;
+  private userSubscription?: Subscription;
 
-  constructor(private deckService: DeckService) {}
+  ngOnDestroy() {
+    this.userSubscription?.unsubscribe();
+  }
 
-  async ngOnInit() {
+  constructor(private deckService: DeckService, private authService: AuthService) {}
+
+  ngOnInit() {
     this.deckService.getPublicDecks().subscribe((decks: Deck[]) => {
       this.decks = decks;
+    });
+
+    this.userSubscription = this.authService.currentUser.subscribe((currentUser) => {
+      this.user = currentUser?.user || null;
+      console.log('TopBar user:', this.user);
     });
   }
 
   copyDeck(deck: Deck) {
-    // TODO: implement copying a public deck into user's decks
-    console.log('Copy deck clicked', deck);
+    if (!this.user) {
+      alert('You must be logged in to copy a deck.');
+      return;
+    }
+
+    this.deckService.copyPublicDeck(deck.id).subscribe({
+      next: (newDeck: Deck) => {
+        alert(`Deck "${deck.name}" copied successfully!`);
+      },
+      error: () => {
+        alert('Failed to copy deck.');
+      },
+    });
   }
 }

@@ -18,6 +18,10 @@ export class DeckService {
     return this.http.get<Deck[]>(`${this.path}/public`);
   }
 
+  copyPublicDeck(deckId: string): Observable<Deck> {
+    return this.http.post<Deck>(`${this.path}/${deckId}/copy`, {});
+  }
+
   getDeckById(deckId: string): Observable<Deck | null> {
     return this.http.get<Deck>(`${this.path}/${deckId}`);
   }

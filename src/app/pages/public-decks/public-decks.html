@@ -9,7 +9,7 @@
 				</div>
 			<div class="deck-actions">
 				<a [routerLink]="['/study', deck.id]" class="btn btn-primary">Study</a>
-				<button type="button" class="btn btn-secondary" (click)="copyDeck(deck)">Copy</button>
+				<button type="button" class="btn btn-secondary" (click)="copyDeck(deck)" *ngIf="user">Copy</button>
 			</div>
 			</li>
 		}
