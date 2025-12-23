@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Card } from '../types/card';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../config/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CardService {
-  private path = 'http://localhost:3000/cards';
+  private path = `${environment.apiBaseUrl}/cards`;
   constructor(private http: HttpClient) {}
 
   getFlashcardsByDeckId(deckId: string): Observable<Card[]> {

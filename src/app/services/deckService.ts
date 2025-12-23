@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Deck } from '../types/deck';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../config/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DeckService {
-  private path = 'http://localhost:3000/decks';
+  private path = `${environment.apiBaseUrl}/decks`;
   constructor(private http: HttpClient) {}
 
   getDecks(): Observable<Deck[]> {
