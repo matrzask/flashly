@@ -10,7 +10,7 @@ import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/decks', pathMatch: 'full' },
+  { path: '', redirectTo: '/public-decks', pathMatch: 'full' },
   { path: 'login', component: Login, canActivate: [guestGuard] },
   { path: 'register', component: Register, canActivate: [guestGuard] },
   { path: 'study/:id', component: StudyDeck },

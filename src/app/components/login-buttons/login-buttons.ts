@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/authService';
 import { User } from '../../types/user';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginButtons {
   user: User | null = null;
   private userSubscription?: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.userSubscription = this.authService.currentUser.subscribe((currentUser) => {
@@ -28,5 +28,6 @@ export class LoginButtons {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

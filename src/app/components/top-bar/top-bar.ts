@@ -22,7 +22,6 @@ export class TopBar {
   ngOnInit() {
     this.userSubscription = this.authService.currentUser.subscribe((currentUser) => {
       this.user = currentUser?.user || null;
-      console.log('TopBar user:', this.user);
     });
   }
 
