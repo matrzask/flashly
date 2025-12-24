@@ -17,7 +17,6 @@ export class AuthService {
       JSON.parse(localStorage.getItem('currentUser')!)
     );
     this.currentUser = this.currentUserSubject.asObservable();
-    console.log('User loaded from localStorage:', this.currentUserSubject.value);
   }
 
   public get currentUserValue(): any {

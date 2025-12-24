@@ -3,6 +3,7 @@ import { Deck } from '../types/deck';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../config/environment';
+import { SearchQuery } from '../types/search-query';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,8 @@ export class DeckService {
     return this.http.get<Deck[]>(this.path);
   }
 
-  getPublicDecks(): Observable<Deck[]> {
-    return this.http.get<Deck[]>(`${this.path}/public`);
+  getPublicDecks(query: SearchQuery): Observable<any> {
+    return this.http.get<Deck[]>(`${this.path}/public`, { params: { ...query } });
   }
 
   copyPublicDeck(deckId: string): Observable<Deck> {

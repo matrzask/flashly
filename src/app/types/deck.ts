@@ -4,4 +4,5 @@ export interface Deck {
   public: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  author?: string;
 }

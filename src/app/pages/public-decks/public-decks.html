@@ -1,11 +1,45 @@
 <div class="deck-list-container">
 	<h1>Public Decks</h1>
 
-	<ul class="deck-list">
+	<div class="search-container">
+		<div class="search-box">
+			<label for="search-name">Deck Name</label>
+			<input
+				id="search-name"
+				type="text"
+				[(ngModel)]="searchName"
+				(ngModelChange)="onSearchChange()"
+				placeholder="Search by deck name..."
+				class="search-input"
+			/>
+		</div>
+		<div class="search-box">
+			<label for="search-author">Author</label>
+			<input
+				id="search-author"
+				type="text"
+				[(ngModel)]="searchAuthor"
+				(ngModelChange)="onSearchChange()"
+				placeholder="Search by author..."
+				class="search-input"
+			/>
+		</div>
+	</div>
+
+	<div class="results-info" *ngIf="!loading">
+		<p>Showing {{ decks.length }} of {{ totalItems }} deck{{ totalItems !== 1 ? 's' : '' }}</p>
+	</div>
+
+	<div class="loading" *ngIf="loading">
+		<p>Loading...</p>
+	</div>
+
+	<ul class="deck-list" *ngIf="!loading">
 		@for (deck of decks; track deck.id) {
 			<li class="deck-item card-container">
 				<div class="deck-info">
 					<h2>{{deck.name}}</h2>
+          <h3>{{deck.author}}</h3>
 				</div>
 			<div class="deck-actions">
 				<a [routerLink]="['/study', deck.id]" class="btn btn-primary">Study</a>
@@ -13,6 +47,51 @@
 				<button type="button" class="btn btn-secondary" (click)="copyDeck(deck)" *ngIf="user">Copy</button>
 			</div>
 			</li>
+		} @empty {
+			<li class="no-results">
+				<p>No decks found. Try adjusting your search criteria.</p>
+			</li>
 		}
 	</ul>
+
+	<div class="pagination" *ngIf="!loading && totalPages > 1">
+		<button
+			class="btn btn-secondary pagination-btn"
+			(click)="prevPage()"
+			[disabled]="page === 1"
+		>
+			Previous
+		</button>
+
+		<div class="page-numbers">
+			@if (page > 3) {
+				<button class="btn btn-secondary page-btn" (click)="goToPage(1)">1</button>
+				<span class="ellipsis">...</span>
+			}
+
+			@for (pageNum of getPageNumbers(); track pageNum) {
+				<button
+					class="btn page-btn"
+					[class.btn-primary]="pageNum === page"
+					[class.btn-secondary]="pageNum !== page"
+					(click)="goToPage(pageNum)"
+				>
+					{{ pageNum }}
+				</button>
+			}
+
+			@if (page < totalPages - 2) {
+				<span class="ellipsis">...</span>
+				<button class="btn btn-secondary page-btn" (click)="goToPage(totalPages)">{{ totalPages }}</button>
+			}
+		</div>
+
+		<button
+			class="btn btn-secondary pagination-btn"
+			(click)="nextPage()"
+			[disabled]="page === totalPages"
+		>
+			Next
+		</button>
+	</div>
 </div>
