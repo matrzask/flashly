@@ -68,11 +68,6 @@ export class EditDeck {
     });
   }
 
-  togglePublic() {
-    if (!this.deck) return;
-    this.deck.public = !this.deck.public;
-  }
-
   async addCard() {
     if (!this.deck) return;
     const front = this.newCardFront.trim();
