@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, UserRole } from '../types/user';
+import { User } from '../types/user';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../config/environment';
@@ -67,6 +67,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           if (response.status === 'fail') {
+            this.logout();
             throw new Error(response.message);
           } else {
             const token = response.data.token;
