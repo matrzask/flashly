@@ -24,6 +24,7 @@ export const jwtInterceptor: HttpInterceptorFn = (
   return next(request).pipe(
     catchError((err) => {
       if (err.status === 401) {
+        if (authService.currentUserValue == null) return throwError(() => err);
         if (!isRefreshing) {
           isRefreshing = true;
           refreshTokenSubject.next(null);

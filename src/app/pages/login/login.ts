@@ -41,7 +41,6 @@ export class Login {
         error: (error) => {
           this.errorMessage = 'Login failed. Please try again.';
           console.error('Login error:', error);
-          this.isLoading = false;
         },
       });
     } catch (error) {
