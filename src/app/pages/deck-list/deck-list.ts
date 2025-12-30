@@ -16,6 +16,7 @@ export class DeckList {
   showNewDeckForm: boolean = false;
   newDeckName: string = '';
   addingDeck: boolean = false;
+  errorMessage: string = '';
 
   constructor(private deckService: DeckService) {}
 
@@ -26,23 +27,28 @@ export class DeckList {
   }
 
   addNewDeck() {
-    if (this.newDeckName.trim()) {
-      this.addingDeck = true;
-
-      this.deckService.createDeck(this.newDeckName).subscribe({
-        next: (newDeck: Deck) => {
-          this.decks.push(newDeck);
-          this.newDeckName = '';
-          this.showNewDeckForm = false;
-        },
-        error: () => {
-          console.error('Failed to create deck');
-        },
-        complete: () => {
-          this.addingDeck = false;
-        },
-      });
+    if (!this.newDeckName.trim()) {
+      this.errorMessage = 'Deck name cannot be empty';
+      return;
     }
+
+    this.errorMessage = '';
+    this.addingDeck = true;
+
+    this.deckService.createDeck(this.newDeckName).subscribe({
+      next: (newDeck: Deck) => {
+        this.decks.push(newDeck);
+        this.newDeckName = '';
+        this.showNewDeckForm = false;
+        this.errorMessage = '';
+      },
+      error: () => {
+        this.errorMessage = 'Failed to create deck';
+      },
+      complete: () => {
+        this.addingDeck = false;
+      },
+    });
   }
 
   deleteDeck(id: string) {
@@ -56,5 +62,7 @@ export class DeckList {
 
   toggleNewDeckForm() {
     this.showNewDeckForm = !this.showNewDeckForm;
+    this.errorMessage = '';
+    this.newDeckName = '';
   }
 }

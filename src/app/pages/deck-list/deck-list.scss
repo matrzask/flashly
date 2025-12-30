@@ -75,3 +75,14 @@
     width: 60%;
   }
 }
+
+.error-message {
+  color: var(--error-color);
+  background-color: var(--error-background);
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0 auto 1.5rem;
+  max-width: 600px;
+}
