@@ -67,7 +67,6 @@ export class AuthService {
       .pipe(
         tap((response) => {
           if (response.status === 'fail') {
-            this.logout();
             throw new Error(response.message);
           } else {
             const token = response.data.token;
